@@ -5,8 +5,10 @@
 
 define e = Character("Eileen")
 define teacher = Character("Mrs. C")
+define narrator = Character(" ")
 
 init python:
+    training = None
     class Dog(object):
         name = ""
         isFemale = None
@@ -21,18 +23,48 @@ init python:
             self.obedience = obedience
             self.intelligence = intelligence
 
+    #makes dog object
     def make_dog(name, gender, agility, obedience, intelligence):
         dog = Dog(name, gender, agility, obedience, intelligence)
         return dog
 
-    akita = make_dog("Jun", False, 2, 1, 3)
-    beagle = make_dog("Mehira", True, 3, 2, 1)
-    lab = make_dog("Kanchi", True, 1, 3, 2)
+    akita = make_dog("Jun", False, 2, 3, 1)
+    beagle = make_dog("Mehira", True, 3, 1, 2)
+    lab = make_dog("Kanchi", True, 1, 2, 3)
+
+    #returns if the dog can successfully complete training
+    def canPass(stat, compStat):
+        return compStat <= stat
+
+    import dialogue
+
+    # returns the label of where the dialogue is located
+    def passDialogue(stat, compStat):
+        if canPass(stat, compStat):
+            if training == "o":
+                dialogue.o_good(narrator, stat)
+            elif training == "i":
+                dialogue.i_good(narrator, stat)
+            elif training == "a":
+                dialogue.a_good(narrator, stat)
+            else:
+                narrator("Error: No Choice Selected")
+        else:
+            if training == "o":
+                dialogue.o_bad(narrator, stat)
+            elif training == "i":
+                dialogue.i_bad(narrator, stat)
+            elif training == "a":
+                dialogue.a_bad(narrator, stat)
+            else:
+                narrator("Error: No Choice Selected")
+
+## renpy.set_return_stack(
 
 # The game starts here.
 
 label start:
-
+    stop music fadeout 1.0
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
@@ -210,6 +242,19 @@ label start:
 
     $ pov("My dog's name is " + dogObj.name)
     $ m(m.name + "'s dog is " + mdogObj.name)
+
+    menu:
+        "How will you train your dog?"
+
+        "Obedience Training":
+            $ training = "o"
+            $ passDialogue(dogObj.obedience, dogObj.agility)
+            $ training = "None"
+
+        "Intelligence Training":
+            "Wrong choice"
+        "Agility Training":
+            "Wrong choice"
 
     ## Enter code here for connecting sprites to dog ##
 
