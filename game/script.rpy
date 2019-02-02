@@ -213,5 +213,4 @@ label start:
 
     ## Enter code here for connecting sprites to dog ##
 
-    S
     return
