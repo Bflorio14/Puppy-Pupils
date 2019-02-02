@@ -183,7 +183,7 @@ label start:
                 dog = Character(beagle.name)
             elif povObj.intelligence > povObj.agility:
                 dogObj = lab
-                dog = Character(dog.name)
+                dog = Character(lab.name)
             elif povObj.intelligence < povObj.obedience:
                 dogObj = akita
                 dog = Character(akita.name)
@@ -197,6 +197,21 @@ label start:
             else:
                 dogObj = lab
                 dog = Character(lab.name)
+        m = Character("Madigan")
+        if dogObj == beagle:
+            mdogObj = lab
+            mdog = Character(mdogObj.name)
+        elif dogObj == akita:
+            mdogObj = beagle
+            mdog = Character(mdogObj.name)
+        else:
+            mdogObj = akita
+            mdog = Character(mdogObj.name)
 
     $ pov("My dog's name is " + dogObj.name)
+    $ m(m.name + "'s dog is " + mdogObj.name)
+
+    ## Enter code here for connecting sprites to dog ##
+
+    S
     return
