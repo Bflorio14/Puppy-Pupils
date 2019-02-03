@@ -3,11 +3,15 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
 define teacher = Character("Mrs. C")
 define narrator = Character(" ")
 define m = Character("Madigan")
 define temp = Character("???")
+image madigan = "Madigan.png"
+image clawson = "Mrs. Clawson.png"
+image kanchi = "Kanchi.png"
+image jun = "Jun.png"
+image mehira = "Mehira.png"
 
 init python:
     training = None
@@ -79,8 +83,6 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
-
     # These display lines of dialogue.
 
     #e "You've created a new Ren'Py game."
@@ -106,6 +108,8 @@ label start:
     "You quickly grab it, some pens fly out of it, and you rush into the school."
 
     "Without looking, you almost run someone over."
+
+    show madigan
 
     m "OH! Oh no! I’m so sorry! I didn’t see you coming!"
 
@@ -135,6 +139,8 @@ label start:
 
     ## Change background to school
 
+    hide madigan
+
     narrator "You and your new friend book it into the school."
 
     narrator "Thankfully, there were signs posted around the building that helped you find the examination room quickly."
@@ -143,14 +149,23 @@ label start:
 
     narrator "She looks at you both."
 
+    show clawson at left
+
+    show madigan at right
+
     teacher "Would you two kindly please take your seats? I will discuss the examination once you all are settled."
 
     m "Y-yes! Of course!"
+
+    hide madigan
+
+    hide clawson
 
     narrator "You both fall into your seats, both slightly trembling from the crash of adrenaline and embarrassment."
 
     narrator "You take out your pencils from out of your backpack and wait patiently for the woman to start talking."
 
+    show clawson
     teacher "Good morning everyone! My name is Mrs. Clawson, but you can call me Mrs. C for short!"
 
     teacher "You all are here today for a reason. There were a handful of applications that were selected from the large amount of submissions."
@@ -171,13 +186,19 @@ label start:
 
     teacher "With that being said, I wish you all the best of luck! If you have any questions, please do not hesitate to ask!"
 
+    hide clawson
+
     narrator "She hands a smaller stack of papers row by row, instructing everyone to pass them back."
 
     narrator "You feel a sudden tap on your shoulder."
 
+    show madigan
+
     m "Good luck, okay? (She gives a slight smile)"
 
     temp "Yeah!"
+
+    hide madigan
 
     #e "Once you add a story, pictures, and music, you can release it to the world!"
 
@@ -279,8 +300,6 @@ label start:
         "Procrastinate until the last minute":
             $ povObj.obedience += 2
 
-    $ pov("My test results are:\n Intelligence: "+str(povObj.intelligence)+"\nObedience: "+ str(povObj.obedience)+"\nAgility: "+str(povObj.agility))
-
     python:
         if povObj.intelligence > povObj.obedience and povObj.intelligence > povObj.agility:
             dogObj = lab
@@ -340,6 +359,8 @@ label start:
 
     "Later, you meet up with your new friend outside."
 
+    show madigan
+
     m "Hey, this is kind of awkward, but I never happened to catch your name."
 
     pov "[pov], and you?"
@@ -362,6 +383,8 @@ label start:
     m "It’s nice to have already made a friend!"
     m "Anyways, I will catch you tomorrow!"
 
+    hide madigan
+
     "You part ways and drive back to your home"
     #goes home
     "After a long day, you throw yourself onto the bed simultaneously as your backpack hits the floor."
@@ -378,7 +401,7 @@ label start:
         "You cannot contain your nerves. Feeling like the test was easy doesn’t make you feel any less nervous."
 
     "Distinctive chatter fills the room when Mrs. Clawson stands up."
-
+    show clawson
     teacher "Okay everyone! Please settle down!."
     teacher "I have an announcement to make…"
     "The room slowly shifts to an anticipated silence"
@@ -451,6 +474,8 @@ label start:
     "Each person is introduced to their dog, and is given their leash."
     "Only about a minute passes before your name is addressed."
     $ teacher("[pov], will be partnered up with... ")
+    hide clawson
+    call showDog
     $ teacher(dogObj.name + "!")
     if dogObj.name==lab.name:
         "An adorable Lab follows the walking pattern of previous dogs to a tee, but stumbles before your feet. They look up at you, a little disappointed in itself."
@@ -458,9 +483,13 @@ label start:
         "An Akita approaches, seemingly unaware about the amount of drool hanging from their mouth."
     if dogObj.name==beagle.name:
         "A excited Beagle bascially drags it's handler to you. They are ecstatic to meet you!"
+    call hideDog
+    show clawson
 
     "Mrs. C goes through a couple more names before announcing Madigan’s dog."
     $ teacher(m.name + ", you are partnered up with…")
+    hide clawson
+    call showMDog
     $ teacher(mdogObj.name + "!")
     if mdogObj.name==akita.name:
         "The trainer brings up to Madigan an akita, with a certain glimmer in its eye."
@@ -468,13 +497,15 @@ label start:
         "The trainer brings up to Madigan a beagle, with a certain glimmer in its eye."
     else:
         "The trainer brings up to Madigan a chocolate lab, with a certain glimmer in its eye."
-
+    show madigan at right
     "Unlike the others, Madigan bends down and reaches out her hand as a peace offering."
     "[mdog] gently sniffs her hand. Madigan smiles."
 
     m "I’m excited to be working with you!"
+    call hideMDog
+    hide madigan
     "After all other names are paired off with their partners, Mrs. C speaks up."
-
+    show clawson
     teacher "We’ve reached the end of our partner pairings! You all will be spending a lot of time with your partners."
     teacher "It is crucial that you familiarize yourselves with one another."
     "She glances over to Madigan with a look of reassurance"
@@ -486,7 +517,7 @@ label start:
     teacher "You should not try to strengthen their best qualities, but train your dog in other areas to be on par with their strongest trait."
     teacher "How you train your partner is up to you!"
     teacher "You are all dismissed for the day. I will see you all tomorrow!"
-
+    hide clawson
     #goes home
     "After a long day of utter surprises, you bring your new partner to your apartment."
     "Being caught completely off guard, you have not arranged a bed for them to sleep in."
@@ -494,8 +525,9 @@ label start:
 
     pov "[dog], this is your bed for now! I’m sorry I wasn’t expecting company so soon."
     pov "Let’s call it in for a night, okay?"
+    call showDog
     $ dialogue.night0(narrator, pov, dogObj)
-
+    call hideDog
     #next day at school
     "You and [dog] both seemed to have a restful night, despite the challenges you both faced."
     "You see Madigan and her partner, [mdog], coming up to meet you!"
@@ -600,5 +632,38 @@ label start:
                     narrator("Your dogs agility level is now " + str(dogObj.agility))
         return
     ## Enter code here for connecting sprites to dog ##
+
+    label showDog:
+        if dog.name=="Kanchi":
+            show kanchi
+        elif dog.name=="Jun":
+            show jun
+        else:
+            show mehira
+        return
+    label hideDog:
+            if dog.name=="Kanchi":
+                hide kanchi
+            elif dog.name=="Jun":
+                hide jun
+            else:
+                hide mehira
+            return
+    label showMDog:
+            if mdog.name=="Kanchi":
+                show kanchi
+            elif mdog.name=="Jun":
+                show jun
+            else:
+                show mehira
+            return
+    label hideMDog:
+            if mdog.name=="Kanchi":
+                hide kanchi
+            elif mdog.name=="Jun":
+                hide jun
+            else:
+                hide mehira
+            return
 
     return

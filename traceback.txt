@@ -1,26 +1,28 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 454, in script
-    $ teacher(dogObj.name + "!")
-  File "game/script.rpy", line 454, in <module>
-    $ teacher(dogObj.name + "!")
-NameError: name 'dogObj' is not defined
+  File "game/script.rpy", line 392, in script call
+    pov "Yeah, sure!"
+  File "renpy/common/00console.rpy", line 765, in script call
+    python in _console:
+NameError: name 'dogImg' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 454, in script
-    $ teacher(dogObj.name + "!")
+  File "game/script.rpy", line 392, in script call
+    pov "Yeah, sure!"
+  File "renpy/common/00console.rpy", line 765, in script call
+    python in _console:
+  File "<string>", line 1, in script
   File "C:\Users\bflor\Downloads\renpy-7.1.3-sdk\renpy\ast.py", line 881, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "C:\Users\bflor\Downloads\renpy-7.1.3-sdk\renpy\python.py", line 1913, in py_exec_bytecode
     exec bytecode in globals, locals
-  File "game/script.rpy", line 454, in <module>
-    $ teacher(dogObj.name + "!")
-NameError: name 'dogObj' is not defined
+  File "<string>", line 1, in <module>
+NameError: name 'dogImg' is not defined
 
 Windows-8-6.2.9200
 Ren'Py 7.1.3.1092
 Puppy Pupils 1.0
-Sun Feb 03 13:59:23 2019
+Sun Feb 03 16:10:21 2019
