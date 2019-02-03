@@ -336,8 +336,239 @@ label start:
             mdogObj = akita
             mdog = Character(mdogObj.name)
 
-    $ pov("My dog's name is " + dogObj.name)
-    $ m(m.name + "'s dog is " + mdogObj.name)
+    "The rest of the exam you blasted through. You felt confident submitting your test."
+
+    "Later, you meet up with your new friend outside."
+
+    m "Hey, this is kind of awkward, but I never happened to catch your name."
+
+    pov "[pov], and you?"
+
+    m "My name is Madigan! Nice to meet you properly!"
+    "She smiles."
+    m "How’d you think of the test?"
+
+    menu:
+        "It was challenging!":
+            m "I thought it was pretty thought-provoking too…"
+            $hardTest=True
+        "It was easy!":
+            m "I’m glad you think so!"
+            $hardTest=False
+    m "I hope you did well! Maybe we’ll see each other tomorrow too?"
+
+    pov "Yeah, sure!"
+
+    m "It’s nice to have already made a friend!"
+    m "Anyways, I will catch you tomorrow!"
+
+    "You part ways and drive back to your home"
+    #goes home
+    "After a long day, you throw yourself onto the bed simultaneously as your backpack hits the floor."
+    "For the first time all day, you feel relaxed. You remind yourself that the hardest part was taking the test, and the rest should come easy…"
+    "At least you thought."
+    "From the whirlwind of emotions today, you pass out almost immediately afterward with a soft grin written on your face."
+    #next day at training school.
+    "You woke up that morning feeling refreshed. You took no time at all to get to the school this morning."
+    "You met up with Madigan, both feeling the same rollercoaster of emotions as yesterday."
+    "Small chatters fill the field with a sense of curiosity."
+    if hardTest:
+        "You cannot contain your nerves. Feeling like the test was hard makes you even more nervous!"
+    else:
+        "You cannot contain your nerves. Feeling like the test was easy doesn’t make you feel any less nervous."
+
+    "Distinctive chatter fills the room when Mrs. Clawson stands up."
+
+    teacher "Okay everyone! Please settle down!."
+    teacher "I have an announcement to make…"
+    "The room slowly shifts to an anticipated silence"
+    teacher "Through bizarre, and unpredictable conditions…"
+    teacher "Everyone passed the examination with flying colors!"
+    "Chatter begins to fill the air once more"
+    teacher "Please settle down! I’m not quite finished!"
+    teacher "As much as we would love to have all you talented individuals here, we unfortunately don’t have enough room to keep you all…"
+    teacher "Our team has come up with a new test."
+    m "(Whispering Softly) A new test? I don’t think I’m ready…"
+    teacher "Before you start chattering again, please let me finish explaining."
+    teacher "Traditionally, this would be your first step in your training."
+    teacher "But because of the circumstances, We believe that giving you the opportunity to train here will give you an advantage at more foundations like ours."
+    teacher "That being said, we will only take the best of the group here."
+    m "(In whispers) I’m getting more nervous…"
+    teacher "We will be giving you temporary partners to have hands on experience!"
+    teacher "Partners, of course, meaning your own dog!"
+    m "D-dog?!"
+    teacher "That’s right, you heard me fine!"
+    teacher "We have already randomly assigned your dog to you!"
+    teacher "But first let me go through a briefing on what we do here…"
+    label repeat:
+        teacher "You will have three days to complete this assignment."
+        teacher "On receiving your dog, you will have to learn it’s traits."
+        teacher "Meaning both their strengths and their weaknesses."
+        teacher "In this assignment, we ask of you to strengthen their weaknesses."
+        teacher "However, don’t be fooled, there are challenges that come with training a dog in each trait."
+        teacher "It’s like playing a game of rock, paper, scissors..."
+        teacher "But it is more like obedience, intelligence, agility!"
+        teacher "You cannot train a dog properly in one area if a specific stat is insufficient. For example..."
+        label exampleRepeat:
+            teacher "You cannot train a disobedient dog in intelligence. It will refuse to listen to you!"
+            teacher "You also cannot train a dog in agility if they lack intelligence! Obstacle courses are difficult to master with even the most brilliant dog!"
+            teacher "Lastly, you cannot train a dog in obedience if they lack agility. Less coordinated dogs may stumble while following through commands!"
+        teacher "Do you need me to repeat the assignment?"
+        menu:
+            "Do you need me to repeat the assignment?"
+
+            "Yes please!":
+                jump repeat
+            "Uhh, what were the examples again?":
+                jump exampleRepeat
+            "No thank you!":
+                pass
+
+    teacher "Let’s take a trip to our onsite training locations!"
+    #goto agility location
+    teacher "The great outdoors is the best way to train your dog in agility!"
+    teacher "Try to get exercise in with your dog! Take them for a walk around the field, the building, or even the block!"
+    teacher "Get them more associated with the world surrounding them! They will be leaders in the world after all!"
+    teacher "I think that’s relatively straight forward, let’s move on to the next location!"
+    #goto obedience site
+    teacher "This is our classroom for our PUPil’s."
+    "No one laughed at the joke"
+    teacher "Ahem… I will be your boss here at this sight, and I have a soft spot for people who share the same sense of humor as me!"
+    "A mumbled, force laughter fills the teacher’s ears"
+    teacher "You’re getting it! Right, about the training course…"
+    teacher "“We will be teaching your partners here on simple commands, such as fetch, sit, stay"
+    teacher "And later on more difficult commands, such as pushing a button, or going to get help!"
+    teacher "These commands are important for a guide dog in training!"
+    teacher "Come along now, everyone!"
+    #goto intelligence site
+    teacher "This is our gymnasium where you will work with your dog to recognize certain items, like a water bottle, or a phone!"
+    teacher "We will ask them to retrieve these items for us."
+    teacher "The main concept here is to expand their knowledge of items that their owner may need on a daily basis."
+    teacher "Thank you for being patient, I know you’ve all been waiting to see who your partner may be!"
+    teacher "As you may notice, there are a group of trainers sitting on the bleachers with dogs in bandanas!"
+    teacher "These will be your future partners. We will be assigning them to you right now."
+    "Mrs.C pulls out a clipboard with a pen dangling by a string. She starts to read down the list of people."
+    "Each person is introduced to their dog, and is given their leash."
+    "Only about a minute passes before your name is addressed."
+    $ teacher("[pov], will be partnered up with... ")
+    $ teacher(dogObj.name + "!")
+    if dogObj.name==lab.name:
+        "An adorable Lab follows the walking pattern of previous dogs to a tee, but stumbles before your feet. They look up at you, a little disappointed in itself."
+    if dogObj.name==akita.name:
+        "An Akita approaches, seemingly unaware about the amount of drool hanging from their mouth."
+    if dogObj.name==beagle.name:
+        "A excited Beagle bascially drags it's handler to you. They are ecstatic to meet you!"
+
+    "Mrs. C goes through a couple more names before announcing Madigan’s dog."
+    $ teacher(m.name + ", you are partnered up with…")
+    $ teacher(mdogObj.name + "!")
+    if mdogObj.name==akita.name:
+        "The trainer brings up to Madigan an akita, with a certain glimmer in its eye."
+    elif mdogObj.name==beagle.name:
+        "The trainer brings up to Madigan a beagle, with a certain glimmer in its eye."
+    else:
+        "The trainer brings up to Madigan a chocolate lab, with a certain glimmer in its eye."
+
+    "Unlike the others, Madigan bends down and reaches out her hand as a peace offering."
+    "[mdog] gently sniffs her hand. Madigan smiles."
+
+    m "I’m excited to be working with you!"
+    "After all other names are paired off with their partners, Mrs. C speaks up."
+
+    teacher "We’ve reached the end of our partner pairings! You all will be spending a lot of time with your partners."
+    teacher "It is crucial that you familiarize yourselves with one another."
+    "She glances over to Madigan with a look of reassurance"
+    teacher "Of course, I forgot to mention that these pup’s will be coming home with you!"
+    "There is a sudden chatter filling the room of mixed emotions."
+    teacher "However, we acknowledge that this was sprung on you last minute. We do understand if you must leave your partner here overnight at our kennel."
+    teacher "But, as I mentioned before, it is crucial for you and your partner to familiarize each other with one another. You need to learn their traits and skill set in order to train them."
+    teacher "Just as a gentle reminder, you only need to focus on your dog’s weaknesses throughout the three day course."
+    teacher "You should not try to strengthen their best qualities, but train your dog in other areas to be on par with their strongest trait."
+    teacher "How you train your partner is up to you!"
+    teacher "You are all dismissed for the day. I will see you all tomorrow!"
+
+    #goes home
+    "After a long day of utter surprises, you bring your new partner to your apartment."
+    "Being caught completely off guard, you have not arranged a bed for them to sleep in."
+    "Instead, you bring a large blanket and put it on the floor on the other side of the room."
+
+    pov "[dog], this is your bed for now! I’m sorry I wasn’t expecting company so soon."
+    pov "Let’s call it in for a night, okay?"
+    $ dialogue.night0(narrator, pov, dogObj)
+
+    #next day at school
+    "You and [dog] both seemed to have a restful night, despite the challenges you both faced."
+    "You see Madigan and her partner, [mdog], coming up to meet you!"
+    m "Hey [pov] and [dog]! Are you guys ready for the day?"
+    mdog "Woof!"
+    pov "Yes! Me and [dog] are both excited for today!"
+    m "That's great! I think [mdog] and I have to figure out where we are training today..."
+    m "Mrs. C mentioned yesterday how we should focus on our dogs weaknesses..."
+    m "I had a great night with [mdog] last night, but I had trouble figuring out what their weaknesses are! They seem like such a well rounded dog!"
+    mdog "Woof!"
+    "Madigan giggles"
+    m "So I have no idea where I’m starting today. I hope you at least have some idea where you’re going!"
+    m "Maybe I’ll catch up with you later after training?"
+    pov "Yeah, sure! Good luck on your first day!"
+    m "(She gives you a bright smile) You too!"
+
+    #training options
+    call dailyChoice
+
+    m "Hey [pov], [dog]! How was training?"
+    if passed:
+        pov "It was great! [dog] did a great job out there today!"
+        m "Glad to hear it!"
+    else:
+        pov "It wasn’t great... but me and [dog] will get the hang of this soon!"
+        m "That's the spirit!"
+    m "Hey, what do you say if we grab a coffee on the way home tonight? Would you and [dog] be interested?"
+
+    menu:
+        "Yes, let's go!":
+            #goto coffee shop
+
+            "You and Madigan walked to a local coffee shop."
+            "On entering, you smell strong flavors such as cinnamon, peppermint..."
+            "You grab your favorite coffee drink, and get a pupachino for [dog]."
+            "Madigan and you make your way towards a 2-seater table in the corner of the shop."
+            "You tilt your pupacino towards [dog], and they happily shove their nose right in the whip cream!"
+            m "Hey, [pov]..."
+            pov "Yeah?"
+            m "What made you want to be a guide dog trainer"
+            "You pause to think about what you’re going to say."
+            pov "My dad was a dog trainer. Not for guide dogs, but more for obedience."
+            pov "I loved seeing the bond between him and his clients, and how determined he was."
+            pov "I always grew up around dogs too, and eventually my dad taught me some tricks too!"
+            pov "I started training with him, and eventually I became confident on my own, and started my own local business!"
+            pov "I think it’s amazing what dogs are capable of if you just guide them."
+            "You look down at [dog] and give them a pet on the head. They lean into your hand."
+            m "I agree with you completely. I think guide dogs in particular are amazing."
+            m "I haven’t had as much experience in hands on training. Actually none at all."
+            m "My uncle was actually blind and he had a guide dog."
+            m "To him, his dog, Iris, was more than just his service dog. She was his best friend. They went everywhere together."
+            m "Even when Iris got too old, he kept her because they had such a great bond. Iris definitely returned the feeling."
+            m "He went through a couple more guide dogs, and eventually my Uncle passed away from old age."
+            m "I know it should be sad, but it fills me with bitter happiness because my uncle got to fill his life to the fullest."
+            m "It was all thanks to his companions over the years. They made it possible."
+            m "I want to let more people have that opportunity to live their life to their fullest, and to experience the same bond that my uncle and Iris had."
+            m "That’s why I want to do this."
+            pov "(Wow. Madigan’s story puts things in a whole new perspective.)"
+            pov "(I always loved dogs, but she’s right. Guide dogs are very special.)"
+            m "Anyway, thanks for coming out with me! It was nice to get to know you more!"
+            pov "Yeah, you too!"
+            $coffee=True
+
+        "Maybe another time":
+            $coffee=False
+            pov "I think it’s getting a little late. [dog] and I are going to call it in for the night. I’ll catch you tomorrow?"
+            m "Yeah, of course! See you tomorrow!"
+    "On the way home, you stopped at the local pet store to pick up an appropriate bed for [dog]."
+    "You pick up the blanket and throw it in the laundry basket. Where the blanket used to be, you place the bed."
+    pov "C’mere [dog]!"
+    "You pat down on the bed."
+    $ dialogue.night1(narrator, pov, dogObj, passed)
+
 
     label dailyChoice:
         menu:
@@ -367,7 +598,7 @@ label start:
                     if passed and dogObj.agility < 3:
                         dogObj.agility+=1
                     narrator("Your dogs agility level is now " + str(dogObj.agility))
-
+        return
     ## Enter code here for connecting sprites to dog ##
 
     return
