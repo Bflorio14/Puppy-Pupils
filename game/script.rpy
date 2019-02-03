@@ -6,6 +6,8 @@
 define e = Character("Eileen")
 define teacher = Character("Mrs. C")
 define narrator = Character(" ")
+define m = Character("Madigan")
+define temp = Character("???")
 
 init python:
     training = None
@@ -34,7 +36,7 @@ init python:
 
     #returns if the dog can successfully complete training
     def canPass(stat, compStat):
-        return compStat <= stat
+        return compStat > stat
 
     import dialogue
 
@@ -49,6 +51,7 @@ init python:
                 dialogue.a_good(narrator, stat)
             else:
                 narrator("Error: No Choice Selected")
+            return True
         else:
             if training == "o":
                 dialogue.o_bad(narrator, stat)
@@ -58,6 +61,7 @@ init python:
                 dialogue.a_bad(narrator, stat)
             else:
                 narrator("Error: No Choice Selected")
+            return False
 
 ## renpy.set_return_stack(
 
@@ -79,14 +83,105 @@ label start:
 
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
+    #e "You've created a new Ren'Py game."
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    "Today is the day."
 
-    # This ends the game.
+    "You pick at your fingernails haphazardly while your car is stopped."
+
+    "To say your nervous is an understatement of the century."
+
+    "After almost a year of waiting (8 months, 2 weeks and 4 days to be exact, but who's counting?) you were finally called by the local Guide Dog Training School."
+
+    "You remember how excited you were to receive that phone call, and how hard it was to keep your cool."
+
+    "Right now, you're on your way to the training school to take an examination."
+
+    "As you pull up to the school, all of your emotions being to heighten."
+
+    "Nervous? Excited? Terrified? Why pick one?"
+
+    "You almost forgot to grab your backpack as you hastily, and almost clumsily, stumble out of your car door."
+
+    "You quickly grab it, some pens fly out of it, and you rush into the school."
+
+    "Without looking, you almost run someone over."
+
+    m "OH! Oh no! I’m so sorry! I didn’t see you coming!"
+
+    temp "It’s definitely my bad! I’m so sorry! I was so excited for the exam, I just was gunning for it!"
+
+    temp "(I need to be more careful!)"
+
+    temp "Are you hurt?"
+
+    m "No, no! Not at all! You caught me off guard is all!"
+
+    temp "(I’m so lucky I didn’t hurt anyone. I shouldn’t of ran off like that. How unprofessional!)"
+
+    m "What an ice breaker, am I right?"
+
+    narrator "She looks down at her watch."
+
+    m "Oh no! I’m going to be late!"
+
+    m "I heard you say you’re taking an exam? Well if it’s the guide dog trainer examination, then I wouldn’t loose footing now!"
+
+    narrator "You look down at your phone."
+
+    narrator "She was right! It's 9:00am on the dot!"
+
+    temp "Lets book it!"
+
+    ## Change background to school
+
+    narrator "You and your new friend book it into the school."
+
+    narrator "Thankfully, there were signs posted around the building that helped you find the examination room quickly."
+
+    narrator "On entering, there is a small woman standing in front of the room, with a desk full of neatly organized papers."
+
+    narrator "She looks at you both."
+
+    teacher "Would you two kindly please take your seats? I will discuss the examination once you all are settled."
+
+    m "Y-yes! Of course!"
+
+    narrator "You both fall into your seats, both slightly trembling from the crash of adrenaline and embarrassment."
+
+    narrator "You take out your pencils from out of your backpack and wait patiently for the woman to start talking."
+
+    teacher "Good morning everyone! My name is Mrs. Clawson, but you can call me Mrs. C for short!"
+
+    teacher "You all are here today for a reason. There were a handful of applications that were selected from the large amount of submissions."
+
+    teacher "These handful of applications stood out. Whether it was from their experiences, their skills, or their knowledge…"
+
+    teacher "Their traits stood out the most."
+
+    teacher "You are those handful of applications! You can give yourself a nice pat on the back."
+
+    teacher "This examination will contain questions to test your knowledge about guide dog training."
+
+    teacher "However, there is a short section on the front page that will not be graded."
+
+    teacher "Its for our understanding on what type of person you are. To admit your weaknesses show character."
+
+    teacher "Please be as honest as you possibly can be. We want to know what training style best suits you!"
+
+    teacher "With that being said, I wish you all the best of luck! If you have any questions, please do not hesitate to ask!"
+
+    narrator "She hands a smaller stack of papers row by row, instructing everyone to pass them back."
+
+    narrator "You feel a sudden tap on your shoulder."
+
+    m "Good luck, okay? (She gives a slight smile)"
+
+    temp "Yeah!"
+
+    #e "Once you add a story, pictures, and music, you can release it to the world!"
 
     # Test begins here
-    define pov = Character("[povname]")
 
     python:
         povname = renpy.input("What is your name?")
@@ -94,6 +189,8 @@ label start:
 
         if not povname:
             povname = "Jesse"
+
+    define pov = Character("[povname]")
 
     menu:
         "What is your gender?"
@@ -229,7 +326,6 @@ label start:
             else:
                 dogObj = lab
                 dog = Character(lab.name)
-        m = Character("Madigan")
         if dogObj == beagle:
             mdogObj = lab
             mdog = Character(mdogObj.name)
@@ -243,18 +339,34 @@ label start:
     $ pov("My dog's name is " + dogObj.name)
     $ m(m.name + "'s dog is " + mdogObj.name)
 
-    menu:
-        "How will you train your dog?"
+    label dailyChoice:
+        menu:
+            "How will you train your dog?"
 
-        "Obedience Training":
-            $ training = "o"
-            $ passDialogue(dogObj.obedience, dogObj.agility)
-            $ training = "None"
-
-        "Intelligence Training":
-            "Wrong choice"
-        "Agility Training":
-            "Wrong choice"
+            "Obedience Training":
+                python:
+                    training = "o"
+                    passed = passDialogue(dogObj.obedience, dogObj.agility)
+                    training = "None"
+                    if passed and dogObj.obedience < 3:
+                        dogObj.obedience+=1
+                    narrator("Your dogs obedience level is now " + str(dogObj.obedience))
+            "Intelligence Training":
+                python:
+                    training = "i"
+                    passed = passDialogue(dogObj.intelligence, dogObj.obedience)
+                    training = "None"
+                    if passed and dogObj.intelligence < 3:
+                        dogObj.intelligence+=1
+                    narrator("Your dogs intelligence level is now " + str(dogObj.intelligence))
+            "Agility Training":
+                python:
+                    training = "a"
+                    passed = passDialogue(dogObj.agility, dogObj.intelligence)
+                    training = "None"
+                    if passed and dogObj.agility < 3:
+                        dogObj.agility+=1
+                    narrator("Your dogs agility level is now " + str(dogObj.agility))
 
     ## Enter code here for connecting sprites to dog ##
 
