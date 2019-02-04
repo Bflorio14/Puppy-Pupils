@@ -18,7 +18,7 @@ image park = im.Scale("park.jpg", 1290, 720)
 image obedience room = im.Scale("intelligent room.png", 1290, 720)
 image intelligence room = im.Scale("gym.png", 1290, 720)
 image agility room = im.Scale("park.jpg", 1290, 720)
-image bg black = "#FFF"
+image bg white = "#FFF"
 init python:
     training = None
     class Dog(object):
@@ -46,32 +46,34 @@ init python:
 
     #returns if the dog can successfully complete training
     def canPass(stat, compStat):
-        return compStat > stat
+        return compStat >= stat
 
     import dialogue
 
     # returns the label of where the dialogue is located
     def passDialogue(stat, compStat):
+        passed = None
         if canPass(stat, compStat):
             if training == "o":
-                dialogue.o_good(narrator, stat)
+                passed = dialogue.o_good(narrator, stat)
             elif training == "i":
-                dialogue.i_good(narrator, stat)
+                passed = dialogue.i_good(narrator, stat)
             elif training == "a":
-                dialogue.a_good(narrator, stat)
+                passed = dialogue.a_good(narrator, stat)
             else:
                 narrator("Error: No Choice Selected")
-            return True
+                passed = False
         else:
             if training == "o":
-                dialogue.o_bad(narrator, stat)
+                passed = dialogue.o_bad(narrator, stat)
             elif training == "i":
-                dialogue.i_bad(narrator, stat)
+                passed = dialogue.i_bad(narrator, stat)
             elif training == "a":
-                dialogue.a_bad(narrator, stat)
+                passed = dialogue.a_bad(narrator, stat)
             else:
                 narrator("Error: No Choice Selected")
-            return False
+                passed = False
+        return passed
 
 ## renpy.set_return_stack(
 
@@ -211,7 +213,7 @@ label start:
 
     # Test begins here
 
-    scene bg black with fade
+    scene bg white with fade
     python:
         povname = renpy.input("What is your name?")
         povname = povname.strip()
@@ -644,7 +646,7 @@ label start:
     pov "(Everyone that's part of this training program is working so hard... I hope I can keep up)"
     pov "(They all want this so bad. Especially Madigan. I hope she's okay...)"
     pov "(I don't know if I can do this. [dog] is working really hard, but I don't know if I can be the best trainer they need...)"
-    if passed:
+    if dogObj.obedience+dogObj.intelligence+dogObj.agility > 6:
         "[dog] drops a water bottle on your lap and looks up at you with determination."
         pov "What's this, buddy?"
         dog "Woof!"
@@ -826,9 +828,7 @@ label start:
     $ points = dogObj.intelligence+dogObj.agility+dogObj.obedience
     if coffee==True and success==True and points==9:
         jump goodEnding
-    elif coffee==False and success==False:
-        jump badEnding
-    elif points<7:
+    elif points<=7:
         jump badEnding
     else:
         jump neutralEnding

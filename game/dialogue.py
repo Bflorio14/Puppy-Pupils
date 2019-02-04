@@ -1,45 +1,57 @@
 def o_good(narrator, stat):
     if stat == 1:
         narrator("(GOOD) Your dogs obedience level is 1")
+        return True
     elif stat == 2:
         narrator("(GOOD) Your dogs obedience level is 2")
+        return True
     else:
-        narrator("(GOOD) Your dogs obedience level is maxed out")
+        narrator("Your dogs obedience level is maxed out")
+        return False
 def o_bad(narrator, stat):
     if stat == 1:
         narrator("(BAD) Your dogs obedience level is 1")
     elif stat == 2:
         narrator("(BAD) Your dogs obedience level is 2")
     else:
-        narrator("(BAD) Your dogs obedience level is maxed out")
+        narrator("Your dogs obedience level is maxed out")
+    return False
 def i_good(narrator, stat):
     if stat == 1:
         narrator("(GOOD) Your dogs intelligence level is 1")
+        return True
     elif stat == 2:
         narrator("(GOOD) Your dogs intelligence level is 2")
+        return True
     else:
-        narrator("(GOOD) Your dogs intelligence level is maxed out")
+        narrator("Your dogs intelligence level is maxed out")
+        return False
 def i_bad(narrator, stat):
     if stat == 1:
         narrator("(BAD) Your dogs intelligence level is 1")
     elif stat == 2:
         narrator("(BAD) Your dogs intelligence level is 2")
     else:
-        narrator("(BAD) Your dogs intelligence level is maxed out")
+        narrator("Your dogs intelligence level is maxed out")
+    return False
 def a_good(narrator, stat):
     if stat == 1:
         narrator("(GOOD) Your dogs agility level is 1")
+        return True
     elif stat == 2:
         narrator("(GOOD) Your dogs agility level is 2")
+        return True
     else:
-        narrator("(GOOD) Your dogs agility level is maxed out")
+        narrator("Your dogs agility level is maxed out")
+        return False
 def a_bad(narrator, stat):
     if stat == 1:
         narrator("(BAD) Your dogs agility level is 1")
     elif stat == 2:
         narrator("(BAD) Your dogs agility level is 2")
     else:
-        narrator("(BAD) Your dogs agility level is maxed out")
+        narrator("Your dogs agility level is maxed out")
+    return False
 def night0(narrator, pov, dog): #dog paramater is a Dog object
     if dog.name == "Jun":
         narrator("You pat down on the blanket. " + dog.name + " comes forward immediately, trying their best to please you.")
