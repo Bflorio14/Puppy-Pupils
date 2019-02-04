@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Puppy Pupils")
+define config.name = _("Caineyes")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -29,7 +29,8 @@ define config.version = "1.0"
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
-define gui.about = _p("""
+define gui.about = _p("""ABOUT: \n Characters were Designed by Beef Lo Mein. Title screen music was made by Beef lo mein.
+Background line art was found on itch.io and colored in by Beef Lo Mein. \n
 """)
 
 
@@ -149,7 +150,7 @@ define config.save_directory = "PuppyPupils-1549058808"
 ##
 ## The icon displayed on the taskbar or dock.
 
-define config.window_icon = "gui/window_icon.png"
+define config.window_icon = "gui/Kanchi.png"
 
 
 ## Build configuration #########################################################

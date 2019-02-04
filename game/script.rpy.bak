@@ -490,7 +490,7 @@ label start:
     "Only about a minute passes before your name is addressed."
     $ teacher("[pov], will be partnered up with... ")
     hide clawson
-    call showDog from _call_showDog
+    call showDog
     $ teacher(dogObj.name + "!")
     if dogObj.name==lab.name:
         "An adorable Lab follows the walking pattern of previous dogs to a tee, but stumbles before your feet. They look up at you, a little disappointed in itself."
@@ -498,13 +498,13 @@ label start:
         "An Akita approaches, seemingly unaware about the amount of drool hanging from their mouth."
     if dogObj.name==beagle.name:
         "A excited Beagle bascially drags it's handler to you. They are ecstatic to meet you!"
-    call hideDog from _call_hideDog
+    call hideDog
     show clawson
 
     "Mrs. C goes through a couple more names before announcing Madigan's dog."
     $ teacher(m.name + ", you are partnered up with...")
     hide clawson
-    call showMDog from _call_showMDog
+    call showMDog
     $ teacher(mdogObj.name + "!")
     if mdogObj.name==akita.name:
         "The trainer brings up to Madigan an akita, with a certain glimmer in its eye."
@@ -517,7 +517,7 @@ label start:
     "[mdog] gently sniffs her hand. Madigan smiles."
 
     m "I'm excited to be working with you!"
-    call hideMDog from _call_hideMDog
+    call hideMDog
     hide madigan
     "After all other names are paired off with their partners, Mrs. C speaks up."
     show clawson
@@ -541,15 +541,15 @@ label start:
 
     pov "[dog], this is your bed for now! I'm sorry I wasn't expecting company so soon."
     pov "Let's call it in for a night, okay?"
-    call showDog from _call_showDog_1
+    call showDog
     $ dialogue.night0(narrator, pov, dogObj)
-    call hideDog from _call_hideDog_1
+    call hideDog
     #next day at school
     scene outside with fade
     "You and [dog] both seemed to have a restful night, despite the challenges you both faced."
     "You see Madigan and her partner, [mdog], coming up to meet you!"
     show madigan at right
-    call showMDogAtLeft from _call_showMDogAtLeft
+    call showMDogAtLeft
     m "Hey [pov] and [dog]! Are you guys ready for the day?"
     mdog "Woof!"
     pov "Yes! Me and [dog] are both excited for today!"
@@ -563,13 +563,13 @@ label start:
     pov "Yeah, sure! Good luck on your first day!"
     m "(She gives you a bright smile) You too!"
     hide madigan
-    call hideMDog from _call_hideMDog_1
+    call hideMDog
 
     #training options
-    call dailyChoice from _call_dailyChoice
+    call dailyChoice
 
     show madigan at right
-    call showMDogAtLeft from _call_showMDogAtLeft_1
+    call showMDogAtLeft
     m "Hey [pov], [dog]! How was training?"
     if passed:
         pov "It was great! [dog] did a great job out there today!"
@@ -583,7 +583,7 @@ label start:
         "Yes, let's go!":
             #goto coffee shop
             hide madigan
-            call hideMDog from _call_hideMDog_2
+            call hideMDog
             "You and Madigan walked to a local coffee shop."
             "On entering, you smell strong flavors such as cinnamon, peppermint..."
             "You grab your favorite coffee drink, and get a pupachino for [dog]."
@@ -622,20 +622,20 @@ label start:
             pov "I think it's getting a little late. [dog] and I are going to call it in for the night. I'll catch you tomorrow?"
             m "Yeah, of course! See you tomorrow!"
             hide madigan
-            call hideMDog from _call_hideMDog_3
+            call hideMDog
     scene room with fade
     "On the way home, you stopped at the local pet store to pick up an appropriate bed for [dog]."
     "You pick up the blanket and throw it in the laundry basket. Where the blanket used to be, you place the bed."
     pov "C'mere [dog]!"
     "You pat down on the bed."
-    call showDog from _call_showDog_2
+    call showDog
     $ dialogue.night1(narrator, pov, dogObj, passed)
-    call hideDog from _call_hideDog_2
+    call hideDog
     #goto school
     scene outside with fade
     "When you arrive, you start to look for Madigan. She doesn't seem to be anywhere!"
     pov "Maybe I'll run into her later..."
-    call dailyChoice from _call_dailyChoice_1
+    call dailyChoice
     "After training, you look more for Madigan, but you still can't find her."
     pov "(Maybe she went home early? I think I'll head home too then)"
     #goto home
@@ -671,7 +671,7 @@ label start:
     "Madigan is still nowhere to be found."
     pov "(I really hope she's okay...)"
     pov "(But right now, [dog] and I need to do our best today! It's the last day of training!)"
-    call dailyChoice from _call_dailyChoice_2
+    call dailyChoice
     dog "Woof woof!"
     m "[pov], please, I need your help!"
     pov "Madigan?! Where have you been?!"

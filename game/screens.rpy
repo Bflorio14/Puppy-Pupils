@@ -266,7 +266,8 @@ screen quick_menu():
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
 init python:
-    config.overlay_screens.append("quick_menu")
+    #config.overlay_screens.append("quick_menu")
+    pass
 
 default quick_menu = True
 
@@ -307,9 +308,9 @@ screen navigation():
 
             textbutton _("History") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+            #textbutton _("Save") action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
+        #textbutton _("Load") action ShowMenu("load")
 
         textbutton _("Preferences") action ShowMenu("preferences")
 
