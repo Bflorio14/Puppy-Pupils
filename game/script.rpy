@@ -435,7 +435,7 @@ label start:
     teacher "Partners, of course, meaning your own dog!"
     m "D-dog?!"
     teacher "That's right, you heard me fine!"
-    teacher "We have already randomly assigned your dog to you!"
+    teacher "We have already assigned your dog to you based on your traits!"
     teacher "But first let me go through a briefing on what we do here..."
     label repeatAssignment:
         teacher "You will have three days to complete this assignment."
@@ -470,6 +470,7 @@ label start:
     teacher "I think that's relatively straight forward, let's move on to the next location!"
     #goto obedience site
     scene obedience room with fade
+    show clawson
     teacher "This is our classroom for our PUPil's."
     "No one laughed at the joke"
     teacher "Ahem... I will be your boss here at this sight, and I have a soft spot for people who share the same sense of humor as me!"
@@ -481,6 +482,7 @@ label start:
     teacher "Come along now, everyone!"
     #goto intelligence site
     scene intelligence room with fade
+    show clawson
     teacher "This is our gymnasium where you will work with your dog to recognize certain items, like a water bottle, or a phone!"
     teacher "We will ask them to retrieve these items for us."
     teacher "The main concept here is to expand their knowledge of items that their owner may need on a daily basis."
@@ -647,6 +649,7 @@ label start:
     pov "(They all want this so bad. Especially Madigan. I hope she's okay...)"
     pov "(I don't know if I can do this. [dog] is working really hard, but I don't know if I can be the best trainer they need...)"
     if dogObj.obedience+dogObj.intelligence+dogObj.agility > 6:
+        call showDog
         "[dog] drops a water bottle on your lap and looks up at you with determination."
         pov "What's this, buddy?"
         dog "Woof!"
@@ -675,6 +678,7 @@ label start:
     pov "(But right now, [dog] and I need to do our best today! It's the last day of training!)"
     call dailyChoice from _call_dailyChoice_2
     dog "Woof woof!"
+    show madigan
     m "[pov], please, I need your help!"
     pov "Madigan?! Where have you been?!"
     m "Long story! In short, [mdog] has wandered off somewhere and I've been looking for them all over!"
@@ -683,10 +687,13 @@ label start:
     if coffee:
         pov "I know how much this means to you, Mad."
     pov "It's okay, [dog] and I will help you find [mdog]!"
+    hide madigan
+    call showDog
     dog "Woof!"
     pov "What is it [dog]?"
     dog "Woof!!!"
     "And at that moment, you knew what to tell [dog] in order to find [mdog]!"
+    call hideDog
     $ success=False
     menu:
         "Use Agility":
@@ -694,14 +701,18 @@ label start:
             if dogObj.agility>=dogObj.obedience and dogObj.agility>=dogObj.intelligence:
                     $ success=True
                     "[dog] takes off in a sprint! Before you can even blink they take off around the corner."
+                    show madigan
                     m "Im sorry, now we both lost our dogs!"
                     pov "It's okay, I'm sure we we will-"
                     mdog "(Distant) Woof! Woof!!!"
                     m "[mdog]!"
+                    hide madigan
                     "You take off, following the barks the whole way."
                     "You arrive at the park, where you see [dog] and [mdog] eyeballing the hot dog stand."
                     pov "C'mere [dog]! C'mere [mdog]!"
                     "The two dogs run over to you and Madigan, cheeks flapping in the air."
+                    show madigan at left
+                    call showMDogAtRight
                     m "[mdog] I've been so worried about you! Where did you go?"
                     mdog "Woof!"
                     m "Well, I'm just glad you are safe..."
@@ -714,14 +725,14 @@ label start:
                     "Madigan hugs you, and leaves with [mdog] by her side."
                     m "Come on [mdog], we have lost time to make up for!"
                     mdog "Woof!!!"
-
-
-
+                    hide madigan
+                    call hideMDog
 
             else:
                     pov "We should split up!"
                     "You search for hours, but cannot find [mdog]."
                     "You go back to the school to find Madigan, who has already found [mdog]"
+                    show madigan
                     m "Would you  believe it? [mdog] was in the park waiting by the hot dog stand!"
                     pov "That's so funny! I'm glad you found them!"
                     m "Me too! Now its time to train! Come on, [mdog]!"
@@ -735,14 +746,18 @@ label start:
                     "Even though [dog] has no idea where they are going, they seem determined to help."
                     "[dog] runs around the corner, trying to please [pov]."
                     $success=True
-                    m "I'm sorry, now we both lost our dogs!"
+                    show madigan
+                    m "Im sorry, now we both lost our dogs!"
                     pov "It's okay, I'm sure we we will-"
                     mdog "(Distant) Woof! Woof!!!"
                     m "[mdog]!"
+                    hide madigan
                     "You take off, following the barks the whole way."
                     "You arrive at the park, where you see [dog] and [mdog] eyeballing the hot dog stand."
                     pov "C'mere [dog]! C'mere [mdog]!"
                     "The two dogs run over to you and Madigan, cheeks flapping in the air."
+                    show madigan at left
+                    call showMDogAtRight
                     m "[mdog] I've been so worried about you! Where did you go?"
                     mdog "Woof!"
                     m "Well, I'm just glad you are safe..."
@@ -755,7 +770,8 @@ label start:
                     "Madigan hugs you, and leaves with [mdog] by her side."
                     m "Come on [mdog], we have lost time to make up for!"
                     mdog "Woof!!!"
-
+                    hide madigan
+                    call hideMDog
 
 
 
@@ -763,6 +779,7 @@ label start:
                     pov "We should split up!"
                     "You search for hours, but cannot find [mdog]."
                     "You go back to the school to find Madigan, who has already found [mdog]"
+                    show madigan
                     m "Would you  believe it? [mdog] was in the park waiting by the hot dog stand!"
                     pov "That's so funny! I'm glad you found them!"
                     m "Me too! Now its time to train! Come on, [mdog]!"
@@ -773,14 +790,18 @@ label start:
                 if dogObj.intelligence>=dogObj.obedience and dogObj.intelligence>=dogObj.agility:
                     "[dog] sniffs around carefully and methodically. They stop for a moment, then take off, seemingly following a scent."
                     $success=True
-                    m "I'm sorry, now we both lost our dogs!"
+                    show madigan
+                    m "Im sorry, now we both lost our dogs!"
                     pov "It's okay, I'm sure we we will-"
                     mdog "(Distant) Woof! Woof!!!"
                     m "[mdog]!"
+                    hide madigan
                     "You take off, following the barks the whole way."
                     "You arrive at the park, where you see [dog] and [mdog] eyeballing the hot dog stand."
                     pov "C'mere [dog]! C'mere [mdog]!"
                     "The two dogs run over to you and Madigan, cheeks flapping in the air."
+                    show madigan at left
+                    call showMDogAtRight
                     m "[mdog] I've been so worried about you! Where did you go?"
                     mdog "Woof!"
                     m "Well, I'm just glad you are safe..."
@@ -793,7 +814,8 @@ label start:
                     "Madigan hugs you, and leaves with [mdog] by her side."
                     m "Come on [mdog], we have lost time to make up for!"
                     mdog "Woof!!!"
-
+                    hide madigan
+                    call hideMDog
 
 
 
@@ -801,88 +823,139 @@ label start:
                     pov "We should split up!"
                     "You search for hours, but cannot find [mdog]."
                     "You go back to the school to find Madigan, who has already found [mdog]"
+                    show madigan
                     m "Would you  believe it? [mdog] was in the park waiting by the hot dog stand!"
                     pov "That's so funny! I'm glad you found them!"
                     m "Me too! Now its time to train! Come on, [mdog]!"
                     mdog "Woof!"
 
-
+    scene black with fade
+    "The next day..."
+    scene park with fade
+    show clawson
     teacher "Welcome to presentation day!"
     teacher "Today, you will demonstrate what you have taught your dog in the past three days."
     teacher "To become an official trainer your dog must display obedience, agility, and intelligence..."
     teacher "...in our wonderful obstacle course!"
     teacher "Alright, let's begin!"
+    hide clawson
     "After a few trainers have successfully, and some unsuccessfully, ran the course, it is Madigan's turn."
+    show madigan
     m " Ready [mdog]?"
+    hide madigan
+    call showMDog
     mdog "Woof!"
+    call hideMDog
     "[mdog] leads a blind-folded Madigan across the course with ease."
     "Then, Madigan shows off [mdog]'s smarts."
+    show madigan
     m "Fetch me a water bottle!"
     "[mdog] goes and grabs a water bottle off a nearby table."
     m "Very good!"
+    hide madigan
     "Madigan then pretends to fall to the floor."
     "[mdog] looks at the crowd, barking for help, then goes to lay with Madigan."
     "The two rejoice after an amazing run!"
+    show clawson
     teacher "Well done, Madigan!"
+    hide clawson
 
     $ points = dogObj.intelligence+dogObj.agility+dogObj.obedience
     if coffee==True and success==True and points==9:
-        jump goodEnding
+        call goodEnding
+        scene black with fade
+        "You've unlocked the best ending!"
+        "if you haven't already, you can still play again to try to unlock other endings (such as the good and worst ending)!"
+        "There are also more dogs you can play with waiting for you!"
     elif points<=7:
-        jump badEnding
+        call badEnding
+        scene black with fade
+        "You've unlocked the bad ending!"
+        "if you haven't already, you can still play again to try to unlock other endings (such as the best and good ending)!"
+        "There are also more dogs you can play with waiting for you!"
     else:
-        jump neutralEnding
+        call neutralEnding
+        scene black with fade
+        "You've unlocked the good ending!"
+        "if you haven't already, you can still play again to try to unlock other endings (such as the best and worst ending)!"
+        "There are also more dogs you can play with waiting for you!"
+    return
 
     label goodEnding:
-    m "Thank you! But I don't think I could have done it without [pov]'s help!"
-    "You take a break from cheering your heart out to smile and wave at Madigan."
-    teacher "Alright [pov], you're up!"
-    "[dog] leads you through the obstacle course perfectly!"
-    pov "Fetch me a water bottle!"
-    "[dog] grabs you a nearby water bottle and presents it to your feet."
-    pov "Great job [dog]!"
-    "You then fall to the ground, pretending to be hurt."
-    "[dog] runs over and barks at the spectators, then turns and runs towards your direction."
-    "[dog] cuddles into you, hoping you are okay."
-    pov "It's okay [dog]. I'm fine, see?"
-    "[dog] wags their tail profusely, and starts licking your face."
-    teacher "Very good!"
-    "A few moments pass, and Mrs C. has an announcement."
-    teacher "Okay everyone! Please come over to me to see your results!"
-    "You and Madigan talk to Mrs C, who happily announces you both have become official trainers"
-    m "We made the program! Yay!"
+        show madigan
+        m "Thank you! But I don't think I could have done it without [pov]'s help!"
+        hide madigan
+        "You take a break from cheering your heart out to smile and wave at Madigan."
+        teacher "Alright [pov], you're up!"
+        call showDog
+        "[dog] leads you through the obstacle course perfectly!"
+        pov "Fetch me a water bottle!"
+        "[dog] grabs you a nearby water bottle and presents it to your feet."
+        pov "Great job [dog]!"
+        "You then fall to the ground, pretending to be hurt."
+        call hideDog
+        "[dog] runs over and barks at the spectators, then turns and runs towards your direction."
+        "[dog] cuddles into you, hoping you are okay."
+        pov "It's okay [dog]. I'm fine, see?"
+        call showDog
+        "[dog] wags their tail profusely, and starts licking your face."
+        call hideDog
+        teacher "Very good!"
+        "A few moments pass, and Mrs C. has an announcement."
+        show clawson
+        teacher "Okay everyone! Please come over to me to see your results!"
+        "You and Madigan talk to Mrs C, who happily announces you both have become official trainers"
+        hide clawson
+        show madigan
+        m "We made the program! Yay!"
+        hide madigan
 
-    teacher "And [pov], you have demonstrated a great capability for training."
-    teacher "Your work with [dog] has been so great, I think you two should stay partners for awhile."
-    pov "Really? That's amazing! Did you hear that, [dog]?"
-    dog "Woof!!!"
+        show clawson
+        teacher "And [pov], you have demonstrated a great capability for training."
+        teacher "Your work with [dog] has been so great, I think you two should stay partners for awhile."
+        hide clawson
+        pov "Really? That's amazing! Did you hear that, [dog]?"
+        call showDog
+        dog "Woof!!!"
+        call hideDog
 
-    "You both walk out, heads held high."
-    "...and go get coffee and puppuccinos to sneak back to [dog] and [mdog]."
+        "You and Madigan walk out, heads held high."
+        "...and go get coffee and puppuccinos to sneak back to [dog] and [mdog]."
+        return
 
-
-    return
     label neutralEnding:
-    m "Thank you!"
-    teacher "Alright [pov], you're up!"
-    "[dog] leads you through the obstacle course perfectly!"
-    pov "Fetch me a water bottle!"
-    "[dog] grabs you a nearby water bottle and presents it to your feet."
-    pov "Great job [dog]!"
-    "You then fall to the ground, pretending to be hurt."
-    "[dog] runs over and barks at the spectators, then turns and runs towards your direction."
-    "[dog] cuddles into you, hoping you are okay."
-    pov "It's okay [dog]. I'm fine, see?"
-    "[dog] wags their tail profusely, and starts licking your face."
-    teacher "Very good!"
-    "A few moments pass, and Mrs C. has an announcement."
-    teacher "Okay everyone! Please come over to me to see your results!"
-    "You and Madigan talk to Mrs C, who happily announces you both have become official trainers"
-    m "We made the program! Yay!"
+        show madigan
+        m "Thank you!"
+        hide madigan
+        show clawson
+        teacher "Alright [pov], you're up!"
+        hide clawson
+        call showDog
+        "[dog] leads you through the obstacle course perfectly!"
+        pov "Fetch me a water bottle!"
+        "[dog] grabs you a nearby water bottle and presents it to your feet."
+        pov "Great job [dog]!"
+        "You then fall to the ground, pretending to be hurt."
+        call hideDog
+        "[dog] runs over and barks at the spectators, then turns and runs towards your direction."
+        "[dog] cuddles into you, hoping you are okay."
+        pov "It's okay [dog]. I'm fine, see?"
+        call showDog
+        "[dog] wags their tail profusely, and starts licking your face."
+        call hideDog
+        teacher "Very good!"
+        "A few moments pass, and Mrs C. has an announcement."
+        show clawson
+        teacher "Okay everyone! Please come over to me to see your results!"
+        "You and Madigan talk to Mrs C, who happily announces you both have become official trainers"
+        hide clawson
+        show madigan
+        m "We made the program! Yay!"
+        hide madigan
 
-    "You both walk out, heads held high."
-    "...and go get coffee and puppuccinos to sneak back to [dog] and [mdog]."
-    return
+        "You and Madigan walk out, heads held high."
+        "...and go get coffee and puppuccinos to sneak back to [dog] and [mdog]."
+        return
     label badEnding:
         teacher "Alright [pov], you're up!"
         "[dog] starts to lead you through the obstacle course..."
@@ -891,22 +964,28 @@ label start:
         "With a little redirection, [dog] mushes you forward... right into a pole!"
         "Good thing you have your blindfold on, because I'm sure you don't want your face to be seen after this!"
         "You rub your head, and reluctantly remove your blind fold to ask [dog]'s next task."
+        call showDog
         pov "Fetch me a water bottle!"
         "[dog] grabs a nearby phone."
         pov "[dog]..."
         pov "(Shake it off... you have one last time to prove yourself!)"
         "You then fall to the ground, pretending to be hurt (as if your pride was not)."
+        call hideDog
         "[dog] runs over and barks at the spectators, then turns and runs towards your direction."
         "[dog] then leaves the room, leaving you stranded on the ground!"
         pov "[dog], come back!"
+        call showDog
         "[dog] returns, wagging their tail profusely, and starts licking your face."
+        call hideDog
+        show clawson
         teacher "...I'm sorry, [pov], but this had to be one of the worst exam's I've ever witnessed."
         teacher "Please, spare a few minutes to say goodbye to your partner, I must ask you to leave."
+        hide clawson
+        call showDog
         dog "??? Woof?"
-        pov "You pat [dog]'s head one last time."
+        "You pat [dog]'s head one last time."
         pov "Maybe I wasn't cut out for this after all..."
-        pass
-    return
+        return
 
 
     label dailyChoice:

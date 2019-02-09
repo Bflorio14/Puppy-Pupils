@@ -59,8 +59,8 @@ def night0(narrator, pov, dog): #dog paramater is a Dog object
         narrator("He picks up the blanket in his mouth, and gives it right back to you.")
         pov("No, " + dog.name + "! This is your bed. You lay down in it to sleep!")
         narrator("There is a flush of disappointment in [dog]'s eyes. You can tell he is trying his best to follow your commands, but he does not understand.")
-        pov("You sit down on your bed out of frustration")
-        narrator(dog.name + "picks up blanket once again in his mouth, and brings it over to the foot of your bed. He seems to want to stay close to you!")
+        narrator("You sit down on your bed out of frustration")
+        narrator(dog.name + " picks up blanket once again in his mouth, and brings it over to the foot of your bed. He seems to want to stay close to you!")
         pov("(He seems to be very obedient... I just wish he understood what I was saying!)")
         pov("(Maybe I shouldn't focus on training him in obedience this week...)")
         pov("(His weakness seems to be his intelligence. Maybe I should focus on that!)")
@@ -100,10 +100,10 @@ def night1(narrator, pov, dog,success): #dog paramater is a Dog object
             narrator("Good think you trained them in intelligence today!")
         else:
             narrator("...and they pick up the bed in their mouth!")
-            narrator("You tell him to drop it, but he doesn’t seem to understand!")
-            narrator("He drops the bed eventually, and it’s now flipped over.")
+            narrator("You tell him to drop it, but he doesn't seem to understand!")
+            narrator("He drops the bed eventually, and it's now flipped over.")
             narrator(dog.name + " plops right down on top of it, and looks at you with a smile!")
-            narrator("You’re starting to wish you trained him in agility today instead.")
+            narrator("You're starting to wish you trained him in agility today instead.")
 
     elif dog.name == "Mehira": #beagle
         narrator(dog.name + " lays down on the bed, and starts to rip it apart!")
@@ -112,10 +112,10 @@ def night1(narrator, pov, dog,success): #dog paramater is a Dog object
             narrator(dog.name + " stops, looks at you, and wags their tail!")
             narrator("Good thing you trained them in obedience today! They seem to be learning!")
         else:
-            narrator(dog.name + " pauses, and doesn’t care to listen!")
+            narrator(dog.name + " pauses, and doesn't care to listen!")
             narrator("She starts chewing out the stuffing out of the bed!")
             narrator("You pick her up, and throw the bed out of the room. You put back the blanket for now.")
-            narrator("You’re starting to wish you trained in her in obedience today instead.")
+            narrator("You're starting to wish you trained in her in obedience today instead.")
 
     elif dog.name == "Kanchi":
         narrator(dog.name + " starts to circle around the bed...")
@@ -126,5 +126,5 @@ def night1(narrator, pov, dog,success): #dog paramater is a Dog object
             narrator("And trip on her own two feet!")
             narrator("She get scared again and refuse to lay back on the bed.")
             narrator("She grabs the blanket out of the laundry basket and rolls up into it like a burrito.")
-            narrator("You’re starting to wish you trained her in agility today instead.")
+            narrator("You're starting to wish you trained her in agility today instead.")
     narrator("You turn it in for the night, and eventually fall asleep.")
